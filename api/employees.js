@@ -2,7 +2,11 @@ import express from "express";
 const router = express.Router();
 export default router;
 
-import { getEmployees, createEmployee } from "#db/queries/employees.js";
+import {
+  getEmployees,
+  createEmployee,
+  deleteEmployee,
+} from "#db/queries/employees.js";
 
 router.get("/", async (req, res) => {
   const employees = await getEmployees();
@@ -31,4 +35,9 @@ router.param("id", async (req, res, next, id) => {
 
 router.get("/:id", (req, res) => {
   res.send(req.employee);
+});
+
+router.delete("/:id", async (req, res) => {
+  await deleteEmployee(req.employee.id);
+  res.sendStatus(204);
 });

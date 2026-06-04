@@ -15,7 +15,7 @@ async function seedEmployees() {
     dec: 0,
   });
 
-  for (let i = 1; i < 10; i++) {
+  for (let i = 1; i < 11; i++) {
     await createEmployee(randomName, randomBirthday, randomSalary);
   }
 }

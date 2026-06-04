@@ -1,4 +1,4 @@
-import db from "../../../../6.07-junction_tables/bridge-hospital/db/client";
+import db from "#db/client";
 
 /** @returns the employee created according to the provided details */
 export async function createEmployee({ name, birthday, salary }) {

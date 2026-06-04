@@ -20,3 +20,15 @@ router.post("/", async (req, res) => {
   const employee = await createEmployee({ name, birthday, salary });
   res.status(201).send(employee);
 });
+
+router.param("id", async (req, res, next, id) => {
+  const employee = await getEmployee(id);
+  if (!employee) return res.status(404).send("Employee not found.");
+
+  req.employee = employee;
+  next();
+});
+
+router.get("/:id", (req, res) => {
+  res.send(req.employee);
+});

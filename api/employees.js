@@ -4,9 +4,11 @@ export default router;
 
 import {
   getEmployees,
+  getEmployee,
   createEmployee,
   deleteEmployee,
-} from "#db/queries/employees.js";
+  updateEmployee,
+} from "#db/queries/employees";
 
 router.get("/", async (req, res) => {
   const employees = await getEmployees();

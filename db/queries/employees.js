@@ -1,6 +1,19 @@
+import db from "../../../../6.07-junction_tables/bridge-hospital/db/client";
+
 /** @returns the employee created according to the provided details */
 export async function createEmployee({ name, birthday, salary }) {
-  // TODO
+  const sql = `
+  INSERT INTO employees
+    (name, birthday, salary)
+  VALUES
+    ($1, $2, $3)
+  RETURNING *
+  `;
+  const values = [name, birthday, salary];
+  const {
+    rows: [employee],
+  } = await db.query(sql, values);
+  return employee;
 }
 
 // === Part 2 ===

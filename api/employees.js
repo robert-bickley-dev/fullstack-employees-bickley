@@ -41,3 +41,20 @@ router.delete("/:id", async (req, res) => {
   await deleteEmployee(req.employee.id);
   res.sendStatus(204);
 });
+
+router.put("/:id", async (req, res) => {
+  if (!req.body) return res.status(400).send("Request body required");
+
+  const { name, birthday, salary } = req.body;
+  if (!name || !birthday || !salary) {
+    return res.status(400).send("Missing a required field.");
+  }
+
+  const employee = await updateEmployee({
+    id: req.employee.id,
+    name,
+    birthday,
+    salary,
+  });
+  res.send(employee);
+});

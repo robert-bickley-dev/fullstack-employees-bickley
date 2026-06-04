@@ -13,5 +13,10 @@ router.post("/", async (req, res) => {
   if (!req.body) return res.status(400).send("Request body is required");
 
   const { name, birthday, salary } = req.body;
-  const employee = await createEmployee(name, birthday, salary);
+  if (!name || !birthday || !salary) {
+    return res.status(400).send("Missing a required field.");
+  }
+
+  const employee = await createEmployee({ name, birthday, salary });
+  res.status(201).send(employee);
 });
